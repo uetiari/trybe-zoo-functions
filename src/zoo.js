@@ -9,8 +9,6 @@ function getSpeciesByIds(...ids) {
 function getAnimalsOlderThan(animal, age) {
   return species.find((specie) => specie.name === animal)
     .residents.every((resident) => resident.age > age);
-  // procurar pelo animal
-  // passar check em cada um dos animais
   // usei o Every para passar em todos do itens array
   // https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/every
 }
@@ -34,7 +32,6 @@ function createEmployee({ id, firstName, lastName }, { managers, responsibleFor 
 }
 
 function isManager(id) {
-  // seu código aqui
   return employees.some((employee) => employee.managers.includes(id));
 }
 
@@ -49,7 +46,14 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function countAnimals(specie) {
-  // seu código aqui
+  if (specie === undefined) {
+    const quantAnimal = species.reduce((acc, curAnimal) => {
+      acc[curAnimal.name] = curAnimal.residents.length;
+      return acc;
+    }, {});
+    return quantAnimal;
+  }
+  return species.find((search) => search.name === specie).residents.length;
 }
 
 function calculateEntry(entrants) {
