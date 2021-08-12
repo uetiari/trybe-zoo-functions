@@ -84,10 +84,16 @@ function getSchedule(dayName) {
   }
   return { [dayName]: weekInfo[dayName] }; // se não, mostra retorna param dado informa dia da semana e horários.
 }
-console.log(getSchedule());
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  // procura a id do funcionário na primeira posição
+  const employeeName = employees.find((coop) => coop.id === id).responsibleFor[0];
+  // procura id do animal relacionado com funcionário
+  const animalId = species.find((specie) => specie.id === employeeName).residents;
+  // procura pela idade
+  const animalOlder = animalId.reduce((acc, curr) => (acc.age > curr.age ? acc : curr));
+  return [animalOlder.name, animalOlder.sex, animalOlder.age];
+  // retorna resultado nome, sexo e idade
 }
 
 function increasePrices(percentage) {
