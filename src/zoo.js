@@ -1,7 +1,7 @@
-const { prices } = require('./data');
 const data = require('./data');
 
 const { species, employees } = data;
+const { prices } = require('./data');
 
 function getSpeciesByIds(...ids) {
   return species.filter((specie) => ids.includes(specie.id));
@@ -66,9 +66,25 @@ function getAnimalMap(options) {
   // seu código aqui
 }
 
+const { hours } = require('./data');
+
 function getSchedule(dayName) {
-  // seu código aqui
+  const { Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday } = hours; // destructuring dias da semana
+  const weekInfo = { // constroi um objeto com dias da semana e infos com horários
+    Tuesday: `Open from ${Tuesday.open}am until ${Tuesday.close - 12}pm`, // -12 é pra arrumar horário
+    Wednesday: `Open from ${Wednesday.open}am until ${Wednesday.close - 12}pm`,
+    Thursday: `Open from ${Thursday.open}am until ${Thursday.close - 12}pm`,
+    Friday: `Open from ${Friday.open}am until ${Friday.close - 12}pm`,
+    Saturday: `Open from ${Saturday.open}am until ${Saturday.close - 12}pm`,
+    Sunday: `Open from ${Sunday.open}am until ${Sunday.close - 12}pm`,
+    Monday: 'CLOSED',
+  };
+  if (dayName === 'null' || dayName === undefined) {
+    return weekInfo; // faz uma condição se o param dayName não for informado retorna lista toda
+  }
+  return { [dayName]: weekInfo[dayName] }; // se não, mostra retorna param dado informa dia da semana e horários.
 }
+console.log(getSchedule());
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
