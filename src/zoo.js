@@ -1,7 +1,6 @@
 const data = require('./data');
 
-const { species, employees } = data;
-const { prices } = require('./data');
+const { species, employees, prices } = data;
 
 function getSpeciesByIds(...ids) {
   return species.filter((specie) => ids.includes(specie.id));
@@ -97,7 +96,19 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  // destruturing prices
+  const { Adult, Senior, Child } = prices;
+  const adultValue = Math.round((Adult * ((percentage / 100) + 1)) * 100) / 100;
+  const seniorValue = Math.round((Senior * ((percentage / 100) + 1)) * 100) / 100;
+  const childValue = Math.round((Child * ((percentage / 100) + 1)) * 100) / 100;
+  // guarda cada um em uma const e faz conta de porcentagem, quando recebe percentage de param
+  // arredonda com math round
+  prices.Senior = seniorValue;
+  prices.Adult = adultValue;
+  prices.Child = childValue;
+  // atribui os novos valores
+
+  return prices;
 }
 
 function getEmployeeCoverage(idOrName) {
